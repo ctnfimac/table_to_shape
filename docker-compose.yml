@@ -2,10 +2,10 @@ version: '3.3'
 
 services:
   web:
-    container_name: proyecto.web
+    container_name: table_to_shape.web
     build: ./source
-    command: python /usr/src/source/manage.py runserver 0.0.0.0:8000
     restart: always
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./source/:/usr/src/source/
     ports:
@@ -15,17 +15,21 @@ services:
 
 
   database:
-    image: postgres
-    container_name: proyecto.database
+    image: postgis/postgis
+    container_name: table_to_shape.database
     restart: always
     environment:
-      POSTGRES_DB: info_db
-      POSTGRES_PASSWORD: d123456
-      POSTGRES_USER: christian
+      POSTGRES_DB: gis
+      POSTGRES_PASSWORD: gis123
+      POSTGRES_USER: gis
     ports:
-      - "3009:5432"
+      - "5432:5432"
     volumes:
-      - ./info_data:/var/lib/postgresql/data/
+      - ./table_to_shape_data:/var/lib/postgresql/data/
 
 volumes:
-  info_data:
+  table_to_shape_data:
+
+
+
+#https://video.osgeo.org/w/9cZiX3fMCtpPwhZgRw3oqa
