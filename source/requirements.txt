@@ -3,3 +3,4 @@ geopandas
 GDAL
 psycopg2-binary
 python-decouple
+SQLAlchemy

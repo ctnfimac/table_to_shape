@@ -1,12 +1,13 @@
-import os
-import psycopg2
-import zipfile
+import os, psycopg2, zipfile
+from geopandas import GeoDataFrame
 import geopandas as gpd
-from django.http.response import HttpResponse
+import fiona
 from decouple import config
+from sqlalchemy import create_engine  
+from django.http.response import HttpResponse
 
 
-def armar_archivos_shape(ruta_directorio:str='./badata/tmp/') -> None:
+def build_files_geographicals(path_directory:str='/tmp/') -> None:
     credenciales_db = {
         "host": config('EXTERNAL_DATABASE_HOST'),
         "dbname": config('EXTERNAL_DATABASE_NAME'),
@@ -14,32 +15,32 @@ def armar_archivos_shape(ruta_directorio:str='./badata/tmp/') -> None:
         "user": config('EXTERNAL_DATABASE_USER'),
         "password": config('EXTERNAL_DATABASE_PASSWORD')
     }
-    #TODO:poner tablas
-    tablas = ['calles_dataset_badata']
-    conn = psycopg2.connect(**credenciales_db)
-    
-    for tabla in tablas:
-        sql_query = f'SELECT * FROM auto_badata.{tabla}'
-        gdf = gpd.read_postgis(sql_query, con=conn)
+    tables = ['techos_inteligentes']
+    db_connection_url = f"postgresql://{config('EXTERNAL_DATABASE_USER')}:{config('EXTERNAL_DATABASE_PASSWORD')}@database:{config('EXTERNAL_DATABASE_PORT')}/{config('EXTERNAL_DATABASE_NAME')}"
+    con = create_engine(db_connection_url)  
+
+    for table in tables:
+        sql_query = f'SELECT * FROM public.{table}'
+        df = gpd.read_postgis(sql_query, con=con)
         # Guarda el GeoDataFrame como un Shapefile
-        path = f'{ruta_directorio}{tabla}.shp'
-        gdf.to_file(path, driver='ESRI Shapefile')
+        path = f'{path_directory}{table}.shp'
+        df.to_file(path, driver='ESRI Shapefile')
 
 
-def comprimir_directorio(ruta_directorio:str, ruta_zip:str) -> None:
-    with zipfile.ZipFile(ruta_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for carpeta_actual, _, archivos in os.walk(ruta_directorio):
-            for archivo in archivos:
-                ruta_completa = os.path.join(carpeta_actual, archivo)
-                ruta_relativa = os.path.relpath(ruta_completa, ruta_directorio)
-                zipf.write(ruta_completa, arcname=ruta_relativa)
+def compress_directory(path_directory:str, path_zip:str) -> None:
+    with zipfile.ZipFile(path_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for directory_current, _, files in os.walk(path_directory):
+            for file_ in files:
+                path_complete = os.path.join(directory_current, file_)
+                path_relative = os.path.relpath(path_complete, path_directory)
+                zipf.write(path_complete, arcname=path_relative)
 
 
-def descargar_zip(ruta_zip: str):
-    if os.path.exists(ruta_zip):
-        with open(ruta_zip, 'rb') as archivo_zip:
-            response = HttpResponse(archivo_zip.read(), content_type='application/zip')
-            response['Content-Disposition'] = 'attachment; filename= badata.zip' 
+def download_zip(path_zip: str):
+    if os.path.exists(path_zip):
+        with open(path_zip, 'rb') as file_zip:
+            response = HttpResponse(file_zip.read(), content_type='application/zip')
+            response['Content-Disposition'] = 'attachment; filename= file.zip' 
             return response
     else:
-        print('no existe')
+        print('no exists')

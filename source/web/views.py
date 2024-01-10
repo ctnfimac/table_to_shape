@@ -1,21 +1,20 @@
 from django.shortcuts import render
-from .actions import armar_archivos_shape, descargar_zip, comprimir_directorio
+from .actions import build_files_geographicals, compress_directory, download_zip
 
-# Create your views here.
-#TODO:Estas rutas modificarlas para que no influya dentro del proyecto
-# ruta y nombre del archivo .zip que se generará
-RUTA_ZIP = './badata/badata.zip'
-RUTA_DIRECTORIO_TEMPORAL = './badata/tmp'
+PATH_ZIP = '/home/gisuser/files.zip'
+PATH_DIRECTORY_CURRENT = '/tmp'
 # ruta en donde se guardaran los archivos .shp y asociados
-RUTA_ARCHIVOS = RUTA_DIRECTORIO_TEMPORAL + '/'
+PATH_FILES = PATH_DIRECTORY_CURRENT + '/'
 
 
 def download_files(request):
     if request.method == 'POST':
+        print('hola')
         try:
-            armar_archivos_shape(RUTA_ARCHIVOS)
-            comprimir_directorio(RUTA_DIRECTORIO_TEMPORAL, RUTA_ZIP)
-            return descargar_zip(RUTA_ZIP)
+            build_files_geographicals(PATH_FILES)
+            compress_directory(PATH_DIRECTORY_CURRENT, PATH_ZIP)
+            #TODO:NO DESCARGA EL ZIP SINO LOS ARCHIVOS EN /tmp/
+            return download_zip(PATH_ZIP)
         except Exception as e:
             print(e.__str__())
     else:
