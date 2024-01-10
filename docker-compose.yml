@@ -15,8 +15,8 @@ services:
 
 
   database:
-    image: postgis/postgis
     container_name: table_to_shape.database
+    build: ./database
     restart: always
     environment:
       POSTGRES_DB: gis
@@ -26,10 +26,7 @@ services:
       - "5432:5432"
     volumes:
       - ./table_to_shape_data:/var/lib/postgresql/data/
+      - ./database/files/:/data/
 
 volumes:
   table_to_shape_data:
-
-
-
-#https://video.osgeo.org/w/9cZiX3fMCtpPwhZgRw3oqa

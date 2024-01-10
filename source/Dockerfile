@@ -16,7 +16,6 @@ ENV PYTHONUNBUFFERED 1
 
 ENV PYTHONIOENCODING utf8
 
-
 # Actualiza la lista de paquetes e instala dependencias
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -25,7 +24,6 @@ RUN apt-get update \
     && ln -s /usr/bin/python3 python \
     && pip3 --no-cache-dir install --upgrade pip \
     && rm -rf /var/lib/apt/lists/*
-
 
 # Crea un usuario no root
 RUN useradd -ms /bin/bash gisuser
@@ -39,7 +37,6 @@ ENV LANG C.UTF-8
 
 # espacio de trabajo en donde se encontrará el código del proyecto
 WORKDIR /usr/src/source
-
 
 # copio el requirements.txt en la carpeta definida en WORKDIR
 COPY ./requirements.txt . 
