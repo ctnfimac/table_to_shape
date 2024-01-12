@@ -1,0 +1,21 @@
+body{
+    background-color: rgba(223, 230, 233, .5);
+}
+
+.conection label{
+    font-size: 0.8em;
+}
+
+.conection input{
+    color: gray;
+}
+
+.conection .btn-descargar{
+    /* cursor: pointer; */
+    cursor:unset;
+    opacity:0.2;
+}
+
+.disabled{
+    pointer-events: none;
+}

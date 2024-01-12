@@ -8,14 +8,8 @@ from django.http.response import HttpResponse
 
 
 def build_files_geographicals(path_directory:str='/tmp/') -> None:
-    credenciales_db = {
-        "host": config('EXTERNAL_DATABASE_HOST'),
-        "dbname": config('EXTERNAL_DATABASE_NAME'),
-        "port": config('EXTERNAL_DATABASE_PORT'),
-        "user": config('EXTERNAL_DATABASE_USER'),
-        "password": config('EXTERNAL_DATABASE_PASSWORD')
-    }
-    tables = ['techos_inteligentes']
+
+    tables = ['techos_inteligentes','barrios','recorridos']
     db_connection_url = f"postgresql://{config('EXTERNAL_DATABASE_USER')}:{config('EXTERNAL_DATABASE_PASSWORD')}@database:{config('EXTERNAL_DATABASE_PORT')}/{config('EXTERNAL_DATABASE_NAME')}"
     con = create_engine(db_connection_url)  
 
@@ -40,7 +34,7 @@ def download_zip(path_zip: str):
     if os.path.exists(path_zip):
         with open(path_zip, 'rb') as file_zip:
             response = HttpResponse(file_zip.read(), content_type='application/zip')
-            response['Content-Disposition'] = 'attachment; filename= file.zip' 
+            response['Content-Disposition'] = 'attachment; filename= files.zip' 
             return response
     else:
         print('no exists')
