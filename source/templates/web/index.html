@@ -42,8 +42,8 @@
               </div>
                   <h4>Conexión</h4>
                   <p>
-                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto vienen
-                    las de la base de datos de prueba.
+                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto estan 
+                    seteadas las de prueba.
                   </p>
                   <form id="conexionForm" action="{% url 'web:conection' %}" method="POST"> {% csrf_token %}
                     {{conectionForm}}

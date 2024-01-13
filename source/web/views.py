@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.generic import FormView
 from .actions import build_files_geographicals, compress_directory, download_zip
 from .forms.conectionForms import ConectionForm
+from .clases.databaseConection import DatabaseConection
 
 PATH_ZIP = '/home/gisuser/files.zip'
 PATH_DIRECTORY_CURRENT = '/tmp'
@@ -26,24 +27,17 @@ def download_files(request):
         }
         return render(request, 'web/index.html', context)
 
-#TODO: utilizar patron singleton para la conexión
+
 class ConectionView(FormView):
     form_class = ConectionForm
     template_name = reverse_lazy('web:download_files')
     success_url = reverse_lazy('web:download_files')
     def form_valid(self, form) -> JsonResponse:
-        conn = None
         has_error = True
         response_error = None
         try:
-            credenciales_db = {
-                "host": form.cleaned_data['host'],
-                "dbname": form.cleaned_data['dbname'],
-                "port": form.cleaned_data['port'],
-                "user": form.cleaned_data['user'],
-                "password": form.cleaned_data['password'] 
-            }
-            conn = psycopg2.connect(**credenciales_db)
+            db = DatabaseConection(form.cleaned_data)
+            db.test_conection_postgresql()
             has_error = False
         except (Exception, psycopg2.DatabaseError) as error:
             print(f'Error {error}')

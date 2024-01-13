@@ -1,24 +1,26 @@
-import os, psycopg2, zipfile
-from geopandas import GeoDataFrame
+import os, zipfile
 import geopandas as gpd
-import fiona
 from decouple import config
 from sqlalchemy import create_engine  
 from django.http.response import HttpResponse
+from .clases.databaseConection import DatabaseConection
 
 
 def build_files_geographicals(path_directory:str='/tmp/') -> None:
+    tables = config('DATABASE_TABLES')
+    schema = config('DATABASE_SCHEMA')
 
-    tables = ['techos_inteligentes','barrios','recorridos']
-    db_connection_url = f"postgresql://{config('EXTERNAL_DATABASE_USER')}:{config('EXTERNAL_DATABASE_PASSWORD')}@database:{config('EXTERNAL_DATABASE_PORT')}/{config('EXTERNAL_DATABASE_NAME')}"
-    con = create_engine(db_connection_url)  
+    db = DatabaseConection()
+    con = create_engine(db.credentials_sqlalchemy())  
 
     for table in tables:
-        sql_query = f'SELECT * FROM public.{table}'
+        sql_query = f'SELECT * FROM {schema}.{table}'
         df = gpd.read_postgis(sql_query, con=con)
         # Guarda el GeoDataFrame como un Shapefile
         path = f'{path_directory}{table}.shp'
         df.to_file(path, driver='ESRI Shapefile')
+
+    con.dispose()
 
 
 def compress_directory(path_directory:str, path_zip:str) -> None:
