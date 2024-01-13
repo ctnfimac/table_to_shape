@@ -42,8 +42,8 @@
               </div>
                   <h4>Conexión</h4>
                   <p>
-                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto vienen
-                    las de la base de datos de prueba.
+                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto estan 
+                    seteadas las de prueba.
                   </p>
                   <form id="conexionForm" action="{% url 'web:conection' %}" method="POST"> {% csrf_token %}
                     {{conectionForm}}
@@ -52,7 +52,8 @@
             </div>
             <div class="col-12 col-md-7 d-flex align-self-center justify-content-center">
               <form role="form" action="{% url 'web:download_files' %}" method="POST"> {% csrf_token %}
-                <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;"><img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
+                <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
+                  <img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
                 </button>
               </form>
             </div>
