@@ -1,37 +1,15 @@
 import psycopg2
 from django.urls import reverse_lazy
-from django.http import JsonResponse
-from django.shortcuts import render
+from web.forms.conectionForms import ConectionForm
 from django.views.generic import FormView
-from .actions import build_files_geographicals, compress_directory, download_zip
-from .forms.conectionForms import ConectionForm
-from .clases.databaseConection import DatabaseConection
-
-PATH_ZIP = '/home/gisuser/files.zip'
-PATH_DIRECTORY_CURRENT = '/tmp'
-# ruta en donde se guardaran los archivos .shp y asociados
-PATH_FILES = PATH_DIRECTORY_CURRENT + '/'
-
-
-def download_files(request):
-    if request.method == 'POST':
-        try:
-            build_files_geographicals(PATH_FILES)
-            compress_directory(PATH_DIRECTORY_CURRENT, PATH_ZIP)
-            return download_zip(PATH_ZIP)
-        except Exception as e:
-            print(e.__str__())
-    else:
-        context = {
-            'conectionForm': ConectionForm()
-        }
-        return render(request, 'web/index.html', context)
-
+from django.http import JsonResponse
+from web.utils.database_conection import DatabaseConection
 
 class ConectionView(FormView):
     form_class = ConectionForm
     template_name = reverse_lazy('web:download_files')
     success_url = reverse_lazy('web:download_files')
+    
     def form_valid(self, form) -> JsonResponse:
         has_error = True
         response_error = None

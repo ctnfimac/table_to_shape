@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import download_files, ConectionView
+from web.views.download_files_view import download_files
+from web.views.conection_view import ConectionView
 
 app_name = 'web'
 

@@ -28,7 +28,7 @@ window.onload = function () {
                 conexionMensaje.classList.add('alert-warning');
                 btnDescargar.classList.add('disabled');
                 btnImgDescargar.style.cursor = 'unset';
-                btnImgDescargar.style.opacity = '0.2';               
+                btnImgDescargar.style.opacity = '0.3';               
             }else{
                 msj.innerHTML= '<strong>Conexión establecida</strong>'
                 conexionMensaje.style.display = 'block';
@@ -48,7 +48,7 @@ window.onload = function () {
             conexionMensaje.classList.add('alert-danger');
             btnDescargar.classList.add('disabled');
             btnImgDescargar.style.cursor = 'unset';
-            btnImgDescargar.style.opacity = '0.2';
+            btnImgDescargar.style.opacity = '0.3';
         })
         
 

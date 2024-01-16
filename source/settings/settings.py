@@ -126,3 +126,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Constantes para la aplicación web
+PATH_ZIP = '/home/gisuser/files.zip'
+PATH_DIRECTORY_CURRENT = '/tmp'
+# ruta en donde se guardaran los archivos .shp y asociados
+PATH_FILES = PATH_DIRECTORY_CURRENT + '/'

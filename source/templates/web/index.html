@@ -25,7 +25,7 @@
                 </h4>
               </div>
               <div class="col-12 col-md-6">
-                <img src="{% static 'img/banner.png' %}" width=400  alt="Imágen base de datos a archivo Shape" style="border-radius: 5px;">
+                <img src="{% static 'img/banner.png' %}" width=360  alt="Imágen base de datos a archivo Shape" style="border-radius: 5px;">
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
         <section class="conection">
           <div class="container">
             <div class="row">
-            <div class="col-xs-12 col-md-5 p-4 rounded-1" style="background-color: #fff">
+            <div class="col-xs-12 col-md-6 col-xl-4 p-4 rounded-1" style="background-color: rgba(223, 230, 233, .5)">
               <!--Respuesta para el cliente-->
               <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning" data-mdb-alert-init="" id="conexionMensaje" data-mdb-alert-initialized="true">
                 <div id="msj"></div> 
@@ -50,12 +50,29 @@
                     <button type="submit" class="btn btn-primary mt-4">Establecer Conexión</button>
                   </form> 
             </div>
-            <div class="col-12 col-md-7 d-flex align-self-center justify-content-center">
-              <form role="form" action="{% url 'web:download_files' %}" method="POST"> {% csrf_token %}
-                <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
-                  <img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
-                </button>
-              </form>
+            <div class="col-12 col-md-6 col-xl-8 d-flex align-self-center justify-content-center">
+              <div class="d-flex">
+                <form role="form" action="{% url 'web:download_files' %}" method="POST"> {% csrf_token %}
+                  <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
+                    <img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
+                  </button>
+                  <!-- <div>
+                    <label for="esquema">Esquema:</label>
+                    <select class="form-control select-input placeholder-active active" id="esquema" name="select">
+                      <option value="public" selected>public</option>
+                      <option value="geo" >geo</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="tablas">Tablas:</label>
+                    <select class="form-control select-input placeholder-active active" id="esquema" name="select">
+                      <option value="techos_inteligentes" selected>techos_inteligentes</option>
+                      <option value="recorridos" >recorridos</option>
+                    </select>
+                  </div> -->
+
+                </form>
+              </div>
             </div>
             </div>
           </div>

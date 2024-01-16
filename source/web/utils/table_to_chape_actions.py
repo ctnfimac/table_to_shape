@@ -1,9 +1,8 @@
-import os, zipfile
-import geopandas as gpd
+import os, zipfile, geopandas as gpd
 from decouple import config
 from sqlalchemy import create_engine  
 from django.http.response import HttpResponse
-from .clases.databaseConection import DatabaseConection
+from web.utils.database_conection import DatabaseConection
 
 
 def build_files_geographicals(path_directory:str='/tmp/') -> None:
@@ -13,7 +12,7 @@ def build_files_geographicals(path_directory:str='/tmp/') -> None:
     db = DatabaseConection()
     con = create_engine(db.credentials_sqlalchemy())  
 
-    for table in tables:
+    for table in tables.split(','):
         sql_query = f'SELECT * FROM {schema}.{table}'
         df = gpd.read_postgis(sql_query, con=con)
         # Guarda el GeoDataFrame como un Shapefile

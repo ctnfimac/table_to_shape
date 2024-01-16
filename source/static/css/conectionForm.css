@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(223, 230, 233, .5);
+    background-color: #fff;
 }
 
 .conection label{
@@ -13,7 +13,7 @@ body{
 .conection .btn-descargar{
     /* cursor: pointer; */
     cursor:unset;
-    opacity:0.2;
+    opacity:0.3;
 }
 
 .disabled{
