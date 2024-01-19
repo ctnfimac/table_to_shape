@@ -1,18 +1,17 @@
 import os, zipfile, geopandas as gpd
-from decouple import config
 from sqlalchemy import create_engine  
 from django.http.response import HttpResponse
 from web.utils.database_conection import DatabaseConection
 
 
-def build_files_geographicals(path_directory:str='/tmp/') -> None:
-    tables = config('DATABASE_TABLES')
-    schema = config('DATABASE_SCHEMA')
-
+def build_files_geographicals(path_directory:str='/tmp/', schema:str='public', tables:list=[]) -> None:
     db = DatabaseConection()
     con = create_engine(db.credentials_sqlalchemy())  
 
-    for table in tables.split(','):
+    #elimino los archivos geográficos actuales en el directorio
+    os.system('rm /tmp/*')
+
+    for table in tables:
         sql_query = f'SELECT * FROM {schema}.{table}'
         df = gpd.read_postgis(sql_query, con=con)
         # Guarda el GeoDataFrame como un Shapefile

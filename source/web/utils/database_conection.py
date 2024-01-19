@@ -34,3 +34,17 @@ class DatabaseConection:
     def test_conection_postgresql(self):
         conn = psycopg2.connect(**self.credentials())
         conn.close()
+
+    def get_schemas(self) -> list:
+        conn = psycopg2.connect(**self.credentials())
+        cur = conn.cursor()
+        cur.execute("SELECT schema_name FROM information_schema.schemata WHERE schema_name NOT IN ('tiger_data', 'tiger', 'topology', 'information_schema', 'pg_catalog', 'pg_toast');")
+        records = cur.fetchall()
+        return records
+
+    def get_tables(self) -> list:
+        conn = psycopg2.connect(**self.credentials())
+        cur = conn.cursor()
+        cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name not in ('geography_columns','geometry_columns','spatial_ref_sys');")
+        records = cur.fetchall()
+        return records

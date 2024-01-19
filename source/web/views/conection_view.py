@@ -13,10 +13,14 @@ class ConectionView(FormView):
     def form_valid(self, form) -> JsonResponse:
         has_error = True
         response_error = None
+        schemas = []
+        tables = []
         try:
+            has_error = False
             db = DatabaseConection(form.cleaned_data)
             db.test_conection_postgresql()
-            has_error = False
+            schemas = db.get_schemas()
+            tables = db.get_tables()
         except (Exception, psycopg2.DatabaseError) as error:
             print(f'Error {error}')
             response_error = error.__str__()
@@ -25,7 +29,9 @@ class ConectionView(FormView):
                 'success': True,
                 'status': 200,
                 'has_error': has_error,
-                'errors': response_error
+                'errors': response_error,
+                'tables': tables,
+                'schemas': schemas
             })
     
     def form_invalid(self, form) -> JsonResponse:

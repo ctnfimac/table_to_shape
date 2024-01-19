@@ -4,8 +4,13 @@ window.onload = function () {
     const btnDescargar = document.getElementById('btnDescargar')
     const btnImgDescargar = document.getElementById('btnImgDescargar')
     const msj = document.getElementById('msj')
-
+    
     conexionMensaje.style.display = 'none';
+    
+    // inputs del formulario para elegir esquema y tablas
+    const schema = document.getElementById('schema')
+    const tablesdb = document.getElementById('tablesdb')
+
 
     conexionForm.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -38,6 +43,9 @@ window.onload = function () {
                 btnDescargar.classList.remove('disabled');
                 btnImgDescargar.style.cursor = 'pointer';
                 btnImgDescargar.style.opacity = '1';
+                clean_select()
+                build_schema(data.schemas)
+                build_tables(data.tables)
             }
         })
         .catch( error => {
@@ -58,4 +66,35 @@ window.onload = function () {
     closeBtn.addEventListener('click', () => {
         conexionMensaje.style.display = 'none';
     });
+
+
+    function build_schema(schemas){
+        schemas.forEach(element => {
+            var opt = document.createElement('option');
+            opt.value = element;
+            opt.innerHTML = element;
+            schema.appendChild(opt);
+        });
+    }
+
+    function build_tables(tables){
+        tables.forEach(element => {
+            var opt = document.createElement('option');
+            opt.value = element;
+            opt.innerHTML = element;
+            tablesdb.appendChild(opt);
+        });
+    }
+
+    function clean_select(){
+        var length = schema.options.length;
+        for (i = length-1; i >= 0; i--) {
+            schema.options[i] = null;
+        }
+
+        var length = tablesdb.options.length;
+        for (i = length-1; i >= 0; i--) {
+            tablesdb.options[i] = null;
+        }
+    }
 }

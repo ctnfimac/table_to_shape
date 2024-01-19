@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col-12 col-md-6 text-wrap align-self-center">
                 <h4 class="text-info">
-                  Herramienta para <b>transformar</b> fácilmente los <b>datos Alfanuméricos</b> y <b>Geoespaciales en archivos 
+                  Herramienta para <b>transformar</b> fácilmente los <b>datos Geoespaciales</b> y Alfanuméricos<b> en archivos 
                   geográficos</b> .shp .cpg .dbf .prj .shx
                 </h4>
               </div>
@@ -56,21 +56,16 @@
                   <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
                     <img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
                   </button>
-                  <!-- <div>
-                    <label for="esquema">Esquema:</label>
-                    <select class="form-control select-input placeholder-active active" id="esquema" name="select">
-                      <option value="public" selected>public</option>
-                      <option value="geo" >geo</option>
+                  <div>
+                    <label for="esquema">Esquemas:</label>
+                    <select class="form-control select-input placeholder-active active" id="schema" name="schema">
                     </select>
                   </div>
                   <div>
-                    <label for="tablas">Tablas:</label>
-                    <select class="form-control select-input placeholder-active active" id="esquema" name="select">
-                      <option value="techos_inteligentes" selected>techos_inteligentes</option>
-                      <option value="recorridos" >recorridos</option>
+                    <label for="tablesdb">Tablas:</label>
+                    <select class="form-control select-input placeholder-active active" id="tablesdb" name="tablesdb" multiple>
                     </select>
-                  </div> -->
-
+                  </div>
                 </form>
               </div>
             </div>
