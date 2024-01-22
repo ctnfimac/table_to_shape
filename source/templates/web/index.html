@@ -34,41 +34,42 @@
         <section class="conection">
           <div class="container">
             <div class="row">
-            <div class="col-xs-12 col-md-6 col-xl-4 p-4 rounded-1" style="background-color: rgba(223, 230, 233, .5)">
-              <!--Respuesta para el cliente-->
-              <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning" data-mdb-alert-init="" id="conexionMensaje" data-mdb-alert-initialized="true">
-                <div id="msj"></div> 
-                <button type="button" class="btn-close close" data-mdb-dismiss="alert" aria-label="Close"></button>
-              </div>
+              <div class="col-xs-12 col-md-6 col-xl-4 p-4 rounded-1" style="background-color: rgba(241, 245, 247, 0.5)">
+                  <!--Respuesta para el cliente-->
+                  <div class="alert alert-dismissible fade show alert-success" role="alert" data-mdb-color="warning" data-mdb-alert-init="" id="conexionMensaje" data-mdb-alert-initialized="true">
+                    <div id="msj"></div> 
+                    <button type="button" class="btn-close close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                  </div>
                   <h4>Conexión</h4>
-                  <p>
-                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto estan 
+                  <p class="text-black-50">
+                    Ingrese las credenciales de la base de datos a la cual se conectará. Por defecto están 
                     seteadas las de prueba.
                   </p>
                   <form id="conexionForm" action="{% url 'web:conection' %}" method="POST"> {% csrf_token %}
                     {{conectionForm}}
                     <button type="submit" class="btn btn-primary mt-4">Establecer Conexión</button>
                   </form> 
-            </div>
-            <div class="col-12 col-md-6 col-xl-8 d-flex align-self-center justify-content-center">
-              <div class="d-flex">
-                <form role="form" action="{% url 'web:download_files' %}" method="POST"> {% csrf_token %}
-                  <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
-                    <img id="btnImgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
-                  </button>
-                  <div>
-                    <label for="esquema">Esquemas:</label>
-                    <select class="form-control select-input placeholder-active active" id="schema" name="schema">
-                    </select>
-                  </div>
-                  <div>
-                    <label for="tablesdb">Tablas:</label>
-                    <select class="form-control select-input placeholder-active active" id="tablesdb" name="tablesdb" multiple>
-                    </select>
-                  </div>
-                </form>
               </div>
-            </div>
+              <div class="col-12 col-md-6 col-xl-8 d-flex align-self-center justify-content-center">
+                <div class="d-flex">
+                  <form role="form" class="d-flex justify-content-center flex-column" action="{% url 'web:download_files' %}" method="POST"> {% csrf_token %}
+                    <button type="submit" class="disabled" id="btnDescargar" style="border: none; cursor: unset;background-color: transparent;">
+                      <img id="imgDescargar" class="text-info btn-descargar" src="{% static 'css/icons/cloud-arrow-down-fill.svg' %}" width="300" alt="Descargar"/>
+                    </button>
+                    <p class="text-black-50">Seleccione el esquema y la/las tablas, luego haga click en el botor de descarga</p>
+                    <div>
+                      <label for="esquema" class="text-black-50">Esquemas:</label>
+                      <select class="form-control select-input placeholder-active active p-0 px-1 text-black-50" id="schema" name="schema">
+                      </select>
+                    </div>
+                    <div>
+                      <label for="tablesdb" class="text-black-50">Tablas:</label>
+                      <select class="form-control select-input placeholder-active active p-0 px-1 text-black-50" id="tablesdb" name="tablesdb" multiple>
+                      </select>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </section>

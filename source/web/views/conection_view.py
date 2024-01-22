@@ -20,7 +20,8 @@ class ConectionView(FormView):
             db = DatabaseConection(form.cleaned_data)
             db.test_conection_postgresql()
             schemas = db.get_schemas()
-            tables = db.get_tables()
+            # asigno las tablas del primer esquema retornado
+            tables = db.get_tables(schemas[0][0])
         except (Exception, psycopg2.DatabaseError) as error:
             print(f'Error {error}')
             response_error = error.__str__()

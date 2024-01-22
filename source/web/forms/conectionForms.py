@@ -7,7 +7,7 @@ class ConectionForm(forms.Form):
         initial='database',
         widget=forms.TextInput(
             attrs={
-                'class':'form-control mb-2',
+                'class':'form-control mb-2 p-0 px-1',
                 'placeholder': 'Ingrese la Ip del Servidor'
             }
         )    
@@ -18,7 +18,7 @@ class ConectionForm(forms.Form):
         initial='gis',
         widget=forms.TextInput(
             attrs={
-                'class':'form-control mb-2',
+                'class':'form-control mb-2 p-0 px-1',
                 'placeholder': 'Ingrese Nombre de la Base de datos'
             }
         )  
@@ -29,7 +29,7 @@ class ConectionForm(forms.Form):
         initial='5432',
         widget=forms.TextInput(
             attrs={
-                'class':'form-control mb-2',
+                'class':'form-control mb-2 p-0 px-1',
                 'placeholder': 'Ingrese el Puerto'
             }
         )
@@ -40,7 +40,7 @@ class ConectionForm(forms.Form):
         initial='gis',
         widget=forms.TextInput(
             attrs={
-                'class':'form-control mb-2',
+                'class':'form-control mb-2 p-0 px-1',
                 'placeholder': 'Ingrese el Usuario'
             }
         )
@@ -51,7 +51,7 @@ class ConectionForm(forms.Form):
         initial='gis123',
         widget=forms.TextInput(
             attrs={
-                'class':'form-control mb-2',
+                'class':'form-control p-0 px-1',
                 'placeholder': 'Ingrese la Contraseña'
             }
         )
