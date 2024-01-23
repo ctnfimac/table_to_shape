@@ -30,10 +30,10 @@ docker exec -ti table_to_shape.database bash
 
 *Genero las tablas de prueba con sus respectivos datos*
 ```
-shp2pgsql -I -s EPSG:4326 -W "latin1" /data/Recorridos_MTB_SEP23.shp public.recorridos | psql -h 127.0.0.1 -p 5432 -d gis -U gis
-```
-```
 shp2pgsql -I -s EPSG:4326 -W "latin1" /data/techos_inteligentes_verdes_WGS84.shp public.techos_inteligentes | psql -h 127.0.0.1 -p 5432 -d gis -U gis
+```
+```
+shp2pgsql -I -s EPSG:4326 -W "latin1" /data/Recorridos_MTB_SEP23.shp public.recorridos | psql -h 127.0.0.1 -p 5432 -d gis -U gis
 ```
 ```
 shp2pgsql -I -s EPSG:4326 -W "latin1" /data/barrios_wgs84.shp public.barrios | psql -h 127.0.0.1 -p 5432 -d gis -U gis
@@ -55,8 +55,6 @@ shp2pgsql -I -s EPSG:4326 -W "latin1" /data/barrios_wgs84.shp public.barrios | p
 Ejemplo de visualización con Qgis de los archivos generados:
 ![Qgis con capas](https://github.com/ctnfimac/table_to_shape/blob/main/source/static/img/muestra.png?raw=true)
 
-## :slightly_smiling_face: Autor
-Christian Peralta :arrow_right: [Linkedin](https://www.linkedin.com/in/christianperalta87/)
 
 
 ## Pruebas Unitarias
@@ -70,3 +68,7 @@ docker exec table_to_shape.web python manage.py test web.utils.tests.test_databa
 ```
 docker exec table_to_shape.web python manage.py test web.utils.tests.test_table_to_shape_actions
 ```
+
+
+## :slightly_smiling_face: Autor
+Christian Peralta :arrow_right: [Linkedin](https://www.linkedin.com/in/christianperalta87/)

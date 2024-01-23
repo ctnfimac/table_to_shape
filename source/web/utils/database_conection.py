@@ -45,6 +45,6 @@ class DatabaseConection:
     def get_tables(self, schema:str='public') -> list:
         conn = psycopg2.connect(**self.credentials())
         cur = conn.cursor()
-        cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{schema}' AND table_name not in ('geography_columns','geometry_columns','spatial_ref_sys');")
+        cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{schema}' AND table_name not in ('geography_columns','geometry_columns','spatial_ref_sys') ORDER BY table_name DESC;")
         records = cur.fetchall()
         return records
