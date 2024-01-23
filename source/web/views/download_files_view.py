@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.shortcuts import render
 from web.forms.conectionForms import ConectionForm
-from web.utils.table_to_chape_actions import build_files_geographicals, compress_directory, download_zip
+from web.utils.table_to_shape_actions import build_files_geographicals, compress_directory, download_zip
 
 
 def download_files(request):
