@@ -1,7 +1,7 @@
 # Tablas a Archivos Geográficos
 Este proyecto tiene como objetivo que un usuario pueda conectarse a una pase de datos Postgres/Postgis y descargar la información de una o más tablas en formatos .shp .cpg .dbf .prj .shx 
 
-###📦 Pasos para instalar el proyecto 
+### :package: Pasos para instalar el proyecto  
 Es necesario tener instalado:
 - [Git](https://git-scm.com/) 
 - [Docker](https://www.docker.com/) 
@@ -31,14 +31,16 @@ docker exec -ti table_to_shape.database bash
 *Genero las tablas de prueba con sus respectivos datos*
 ```
 shp2pgsql -I -s EPSG:4326 -W "latin1" /data/Recorridos_MTB_SEP23.shp public.recorridos | psql -h 127.0.0.1 -p 5432 -d gis -U gis
-
+```
+```
 shp2pgsql -I -s EPSG:4326 -W "latin1" /data/techos_inteligentes_verdes_WGS84.shp public.techos_inteligentes | psql -h 127.0.0.1 -p 5432 -d gis -U gis
-
+```
+```
 shp2pgsql -I -s EPSG:4326 -W "latin1" /data/barrios_wgs84.shp public.barrios | psql -h 127.0.0.1 -p 5432 -d gis -U gis
 ```
 **Importante!!**: las tablas tienen que tener el campo **geom**
 
-##:computer: Uso
+## :computer: Uso
 
 1) Entro en la siguiente uri
     ```
@@ -54,7 +56,7 @@ Ejemplo de visualización con Qgis de los archivos generados:
 ![Qgis con capas](https://github.com/ctnfimac/table_to_shape/blob/main/source/static/img/muestra.png?raw=true)
 
 ## :slightly_smiling_face: Autor
-Christian Peralta ([Linkedin](www.linkedin.com/in/christianperalta87))
+Christian Peralta :arrow_right: [Linkedin](https://www.linkedin.com/in/christianperalta87/)
 
 
 ## Pruebas Unitarias
