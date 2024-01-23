@@ -38,7 +38,9 @@ class ConectionTest(TestCase):
                 'success': True,
                 'status': 200,
                 'has_error': False,
-                'errors': None
+                'errors': None,
+                'tables':[['techos_inteligentes'], ['recorridos'], ['barrios']],
+                'schemas': [['public']]
             }
         )
 
@@ -55,6 +57,8 @@ class ConectionTest(TestCase):
                 'success': True,
                 'status': 200,
                 'has_error': True,
-                'errors': 'connection to server at "database" (172.25.0.2), port 5432 failed: FATAL:  password authentication failed for user "gis"\n'
+                'errors': 'connection to server at "database" (172.25.0.2), port 5432 failed: FATAL:  password authentication failed for user "gis"\n',
+                'tables': [],
+                'schemas': []
             }
         )

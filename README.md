@@ -50,8 +50,21 @@ shp2pgsql -I -s EPSG:4326 -W "latin1" /data/barrios_wgs84.shp public.barrios | p
 5) Click en el boton verde de Descargar
 6) Puedo visualizarlos de forma gráfica con [Qgis](https://qgis.org/es/site/) o [Mapshaper](https://mapshaper.org/)
 
-Ejemplo de visualización con Qgis:
+Ejemplo de visualización con Qgis de los archivos generados:
 ![Qgis con capas](https://github.com/ctnfimac/table_to_shape/blob/main/source/static/img/muestra.png?raw=true)
 
 ## :slightly_smiling_face: Autor
 Christian Peralta ([Linkedin](www.linkedin.com/in/christianperalta87))
+
+
+## Pruebas Unitarias
+Para ejecutarlas corra los siguientes comandos
+```
+docker exec table_to_shape.web python manage.py test web.views.tests.test_conection
+```
+```
+docker exec table_to_shape.web python manage.py test web.utils.tests.test_database_conection
+```
+```
+docker exec table_to_shape.web python manage.py test web.utils.tests.test_table_to_shape_actions
+```
