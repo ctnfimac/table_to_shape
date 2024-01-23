@@ -1,7 +1,7 @@
 import os
 from django.test import TestCase
 from web.utils.database_conection import DatabaseConection
-from source.web.utils.table_to_shape_actions import build_files_geographicals, compress_directory
+from web.utils.table_to_shape_actions import build_files_geographicals, compress_directory
 
 class TableToShapeTest(TestCase):
 

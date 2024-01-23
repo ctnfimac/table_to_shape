@@ -70,7 +70,7 @@ class DatabaseConectionTest(TestCase):
         originalmente hay 3
         '''
         tables = self.conection.get_tables('public')
-        self.assertEqual(len(tables), 4)
+        self.assertEqual(len(tables), 3)
         self.assertEqual(tables[0], ('techos_inteligentes',))
         self.assertEqual(tables[1], ('recorridos',))
         self.assertEqual(tables[2], ('barrios',))
