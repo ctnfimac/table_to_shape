@@ -27,7 +27,7 @@ window.onload = function () {
         .then( data => {
             clean_select_schemas()  
             clean_select_tables()  
-            if(data.errors){
+            if(data.errors == 'Credentials incorrects'){
                 msj.innerHTML= '<strong>Credenciales incorrectas</strong>'
                 conexionMensaje.style.display = 'block';
                 conexionMensaje.classList.remove('alert-success');
@@ -36,7 +36,7 @@ window.onload = function () {
                 btnDescargar.classList.add('disabled');
                 imgDescargar.style.cursor = 'unset';
                 imgDescargar.style.opacity = '0.3';           
-            }else{
+            }else if(data.errors == 'Conection ok'){
                 msj.innerHTML= '<strong>Conexión establecida</strong>'
                 conexionMensaje.style.display = 'block';
                 conexionMensaje.classList.remove('alert-warning');

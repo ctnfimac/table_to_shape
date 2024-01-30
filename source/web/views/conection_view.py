@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2, json
 from django.urls import reverse_lazy
 from web.forms.conectionForms import ConectionForm
 from django.views.generic import FormView
@@ -11,8 +11,8 @@ class ConectionView(FormView):
     success_url = reverse_lazy('web:download_files')
     
     def form_valid(self, form) -> JsonResponse:
+        status = 200
         has_error = True
-        response_error = None
         schemas = []
         tables = []
         try:
@@ -22,25 +22,26 @@ class ConectionView(FormView):
             # asigno las tablas del primer esquema retornado
             tables = db.get_tables(schemas[0][0])
             has_error = False
+            msg = 'Conection ok'
         except (Exception, psycopg2.DatabaseError) as error:
-            print(f'Error {error}')
-            response_error = error.__str__()
+            status = 500
+            msg = 'Credentials incorrects'
         finally:
             return JsonResponse({
                 'success': True,
-                'status': 200,
+                'status': status,
                 'has_error': has_error,
-                'errors': response_error,
+                'errors': msg,
                 'tables': tables,
                 'schemas': schemas
-            })
+            }, status=status)
     
     def form_invalid(self, form) -> JsonResponse:
-        errors = form.errors
+        errors = json.loads(form.errors.as_json())
         return JsonResponse({
             'success': True,
-            'status': 400,
+            'status': 500,
             'has_error': True,
-            'errors': errors
-        })
+            'errors': list(errors.keys())
+        }, status=500)
 
